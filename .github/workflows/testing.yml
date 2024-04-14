@@ -25,4 +25,4 @@ jobs:
           which firefox
           firefox --version
       - name: Build with Maven
-        run: mvn -B package --file pom.xml ru.kpfu.itis.gnt.test
+        run: mvn -B package --file pom.xml test

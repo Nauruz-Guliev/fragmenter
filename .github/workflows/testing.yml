@@ -25,7 +25,6 @@ jobs:
           which firefox
           firefox --version
       - name: Code style
-        runs-on: ubuntu-latest
       - uses: actions/checkout@v4
       - uses: dbelyaev/action-checkstyle@master
         with:

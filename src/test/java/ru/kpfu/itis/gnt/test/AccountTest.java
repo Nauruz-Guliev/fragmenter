@@ -17,8 +17,6 @@ public class AccountTest extends TestBase {
 
         navigationHelper.goMainPage();
         accountHelper.login(account);
-
-        Assert.assertEquals(10, 20);
     }
 
     @Test

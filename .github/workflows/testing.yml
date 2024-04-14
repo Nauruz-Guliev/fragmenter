@@ -24,5 +24,10 @@ jobs:
           geckodriver --version
           which firefox
           firefox --version
+      - name: Build with Maven
+        run: mvn -B verify checkstyle:checkstyle
+      - uses: jwgmeligmeyling/checkstyle-github-action@master
+        with:
+          path: '**/checkstyle-result.xml'
       - name: Run Tests
         run: mvn -B package --file pom.xml test

@@ -1,6 +1,5 @@
 package ru.kpfu.itis.gnt.test;
 
-
 import ru.kpfu.itis.gnt.app.AppManager;
 import org.junit.After;
 import org.junit.Before;

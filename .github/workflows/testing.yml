@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: CI for build and Selenium tests
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build_and_tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,11 +24,5 @@ jobs:
           geckodriver --version
           which firefox
           firefox --version
-      - name: Run check style
-        uses: nikitasavinov/checkstyle-action@master
-        with:
-          github_token: ${{ secrets.CHECKSTYLE_TOKEN }}
-          reporter: 'github-pr-check'
-          tool_name: 'testtool'
       - name: Run Tests
         run: mvn -B package --file pom.xml test

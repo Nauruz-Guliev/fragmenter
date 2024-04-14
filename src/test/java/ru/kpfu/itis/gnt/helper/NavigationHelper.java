@@ -1,13 +1,6 @@
 package ru.kpfu.itis.gnt.helper;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.kpfu.itis.gnt.app.AppManager;
-
-import java.time.Duration;
 
 public class NavigationHelper extends HelperBase {
 

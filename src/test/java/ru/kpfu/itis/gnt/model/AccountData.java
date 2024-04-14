@@ -1,7 +1,5 @@
 package ru.kpfu.itis.gnt.model;
 
-import java.util.Objects;
-
 public class AccountData {
 
     private String password;

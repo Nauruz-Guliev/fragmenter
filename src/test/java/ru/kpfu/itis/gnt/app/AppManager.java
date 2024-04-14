@@ -1,5 +1,7 @@
 package ru.kpfu.itis.gnt.app;
 
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import ru.kpfu.itis.gnt.helper.AccountHelper;
 import ru.kpfu.itis.gnt.helper.FragmentCreationHelper;
 import ru.kpfu.itis.gnt.helper.NavigationHelper;
@@ -15,7 +17,11 @@ public class AppManager {
     private final NavigationHelper navigationHelper;
 
     public AppManager() {
-        driver = new FirefoxDriver();
+        FirefoxBinary firefoxBinary = new FirefoxBinary();
+        firefoxBinary.addCommandLineOptions("--headless");
+        FirefoxOptions options = new FirefoxOptions();
+        options.setBinary(firefoxBinary);
+        driver = new FirefoxDriver(options);
         driver.manage().window().maximize();
         accountHelper = new AccountHelper(this);
         fragmentCreationHelper = new FragmentCreationHelper(this);

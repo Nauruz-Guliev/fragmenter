@@ -19,7 +19,10 @@ jobs:
           cache: maven
       - name: Install Firefox
         run: |
-          chmod +x ./scripts/InstallFirefox.sh
-                    ./scripts/InstallFirefox.sh
+          echo "geckodriver/firefox"
+          which geckodriver
+          geckodriver --version
+          which firefox
+          firefox --version
       - name: Build with Maven
         run: mvn -B package --file pom.xml ru.kpfu.itis.gnt.test

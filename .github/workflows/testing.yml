@@ -24,7 +24,5 @@ jobs:
           geckodriver --version
           which firefox
           firefox --version
-  tests_job:
-    - runs-on: ubuntu-latest
-    - name: Run Tests
-      run: mvn -B package --file pom.xml test
+      - name: Run Tests
+        run: mvn -B package --file pom.xml test

@@ -24,12 +24,19 @@ jobs:
           geckodriver --version
           which firefox
           firefox --version
-      - name: Code style
-      - uses: actions/checkout@v4
-      - uses: dbelyaev/action-checkstyle@master
+  checkstyle_job:
+    runs-on: ubuntu-latest
+    name: Checkstyle job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run check style
+        uses: nikitasavinov/checkstyle-action@master
         with:
           github_token: ${{ secrets.CHECKSTYLE_TOKEN }}
-          reporter: github-pr-review
-          checkstyle_version: "9.0"
-      - name: Run Tests
-        run: mvn -B package --file pom.xml test
+          reporter: 'github-pr-check'
+          tool_name: 'testtool'
+  tests_job:
+    - runs-on: ubuntu-latest
+    - name: Run Tests
+      run: mvn -B package --file pom.xml test

@@ -1,37 +1,13 @@
-name: Java CI with Maven
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
+name: reviewdog
+on: [push]
 jobs:
-  build:
+  checkstyle:
+    name: runner / checkstyle
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: maven
-      - name: Install Firefox
-        run: |
-          echo "geckodriver/firefox"
-          which geckodriver
-          geckodriver --version
-          which firefox
-          firefox --version
-
-      - name: CheckStyle
       - uses: actions/checkout@v4
       - uses: dbelyaev/action-checkstyle@master
         with:
-          github_token: ${{ secrets.CHECKSTYLE_TOKEN }}
+          github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
           level: warning
-
-      - name: Run Tests
-        run: mvn -B package --file pom.xml test

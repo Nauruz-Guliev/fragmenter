@@ -10,6 +10,9 @@ public class ClassWithErrors {
     public void testLogout() {
 
 
+
+
+
         System.out.println("FAILED TEST");
     }
 }

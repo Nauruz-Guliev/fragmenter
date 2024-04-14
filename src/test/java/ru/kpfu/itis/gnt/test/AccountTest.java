@@ -1,5 +1,6 @@
 package ru.kpfu.itis.gnt.test;
 
+import org.junit.Assert;
 import ru.kpfu.itis.gnt.helper.AccountHelper;
 import ru.kpfu.itis.gnt.helper.NavigationHelper;
 import ru.kpfu.itis.gnt.model.AccountData;
@@ -16,6 +17,8 @@ public class AccountTest extends TestBase {
 
         navigationHelper.goMainPage();
         accountHelper.login(account);
+
+        Assert.assertEquals(10, 20);
     }
 
     @Test

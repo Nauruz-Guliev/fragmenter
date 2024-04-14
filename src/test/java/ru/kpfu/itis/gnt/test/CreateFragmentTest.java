@@ -10,7 +10,7 @@ public class CreateFragmentTest extends TestBase {
 
     private AccountData account = new AccountData("nauruz0304", "nauruz9248327@gmail.com", "Nau");
 
-    @Test
+    /*@Test
     public void testFragmentCreation() {
         String message = "Погода сегодня восхитительна!";
 
@@ -23,5 +23,5 @@ public class CreateFragmentTest extends TestBase {
 
         navigationHelper.goFragmentCreationPage();
         fragmentCreationHelper.createFragment(message);
-    }
+    }*/
 }

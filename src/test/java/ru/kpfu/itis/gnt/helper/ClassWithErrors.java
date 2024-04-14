@@ -10,6 +10,6 @@ public class ClassWithErrors {
 
 
 
-        System.out.println("FAILED TEST");
+        System.out.println(      "FAILED TEST");
     }
 }

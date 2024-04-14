@@ -24,5 +24,14 @@ jobs:
           geckodriver --version
           which firefox
           firefox --version
+
+      - name: CheckStyle
+      - uses: actions/checkout@v4
+      - uses: dbelyaev/action-checkstyle@master
+        with:
+          github_token: ${{ secrets.CHECKSTYLE_TOKEN }}
+          reporter: github-pr-review
+          level: warning
+
       - name: Run Tests
         run: mvn -B package --file pom.xml test

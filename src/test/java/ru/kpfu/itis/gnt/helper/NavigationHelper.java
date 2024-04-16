@@ -23,4 +23,8 @@ public class NavigationHelper extends HelperBase {
     public void goFragmentCreationPage() {
         getElementById("countdown_allowed").click();
     }
+
+    public void goAccountEditor() {
+        getElementByCssSelector(".fa-pencil").click();
+    }
 }

@@ -16,12 +16,15 @@ public class AppManager {
     private final FragmentCreationHelper fragmentCreationHelper;
     private final NavigationHelper navigationHelper;
 
+    private static final ThreadLocal<AppManager> app = new ThreadLocal<>();
+
+
     public AppManager() {
         FirefoxBinary firefoxBinary = new FirefoxBinary();
         firefoxBinary.addCommandLineOptions("--headless");
         FirefoxOptions options = new FirefoxOptions();
         options.setBinary(firefoxBinary);
-        driver = new FirefoxDriver(options);
+        driver = new FirefoxDriver();
         driver.manage().window().maximize();
         accountHelper = new AccountHelper(this);
         fragmentCreationHelper = new FragmentCreationHelper(this);
@@ -50,5 +53,12 @@ public class AppManager {
 
     public void close() {
         driver.close();
+    }
+
+    public static AppManager getInstance() {
+        if(app.get() == null) {
+            app.set(new AppManager());
+        }
+        return app.get();
     }
 }

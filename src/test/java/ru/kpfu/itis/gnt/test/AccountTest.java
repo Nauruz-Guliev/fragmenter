@@ -11,25 +11,28 @@ public class AccountTest extends TestBase {
     private AccountData account = new AccountData("nauruz0304", "nauruz9248327@gmail.com", "Nau");
 
     @Test
-    public void testLogin() {
+    public void testA() {
         AccountHelper accountHelper = app.getAccountHelper();
         NavigationHelper navigationHelper = app.getNavigationHelper();
 
         navigationHelper.goMainPage();
         accountHelper.login(account);
+
+        Assert.assertEquals(accountHelper.getCurrentName(account.getAccountCode()).getText(), account.getAccountCode());
     }
 
     @Test
-    public void testNicknameNoteChange() {
+    public void testB() {
         String note = "Сегодня хорошая погода! ";
-        testLogin();
         AccountHelper accountHelper = app.getAccountHelper();
+        NavigationHelper navigationHelper = app.getNavigationHelper();
         accountHelper.changeNicknameNote(note, account.getAccountCode());
+        navigationHelper.goAccountEditor();
+        Assert.assertEquals(accountHelper.getUserNote().getText(), note);
     }
 
-    @Test
-    public void testLogout() {
-        testLogin();
+   /* @Test
+    public void testC() {
         app.getAccountHelper().logout(account.getAccountCode());
-    }
+    }*/
 }

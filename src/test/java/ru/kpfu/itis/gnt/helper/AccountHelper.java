@@ -37,4 +37,12 @@ public class AccountHelper extends HelperBase {
         getElementByLinkText(accountCode).click();
         getElementByLinkText("Выйти").click();
     }
+
+    public WebElement getCurrentName(String name) {
+        return getElementByLinkText(name);
+    }
+
+    public WebElement getUserNote(){
+        return getElementById("custom_user_notes");
+    }
 }

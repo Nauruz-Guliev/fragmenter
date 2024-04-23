@@ -33,4 +33,8 @@ public class HelperBase {
     protected void wait(int seconds) {
         app.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
     }
+
+    public boolean checkElementExistsByName(String name) {
+        return !app.getDriver().findElements(By.name(name)).isEmpty();
+    }
 }

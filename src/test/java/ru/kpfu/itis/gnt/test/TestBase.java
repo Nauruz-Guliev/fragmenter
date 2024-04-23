@@ -1,14 +1,15 @@
 package ru.kpfu.itis.gnt.test;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.openqa.selenium.By;
 import ru.kpfu.itis.gnt.app.AppManager;
-import org.junit.Before;
 
 public class TestBase {
 
     static protected AppManager app;
 
-    @Before
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         app = AppManager.getInstance();
     }
 }

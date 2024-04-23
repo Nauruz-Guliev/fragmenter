@@ -1,10 +1,6 @@
 package ru.kpfu.itis.gnt.test;
 
-import ru.kpfu.itis.gnt.helper.AccountHelper;
-import ru.kpfu.itis.gnt.helper.FragmentCreationHelper;
-import ru.kpfu.itis.gnt.helper.NavigationHelper;
 import ru.kpfu.itis.gnt.model.AccountData;
-import org.junit.Test;
 
 public class CreateFragmentTest extends TestBase {
 

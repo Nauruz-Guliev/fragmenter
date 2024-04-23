@@ -1,5 +1,8 @@
 package ru.kpfu.itis.gnt.helper;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import ru.kpfu.itis.gnt.app.AppManager;
 import ru.kpfu.itis.gnt.model.AccountData;
 import org.openqa.selenium.WebElement;
@@ -30,6 +33,16 @@ public class AccountHelper extends HelperBase {
         WebElement userNote = getElementById("custom_user_notes");
         userNote.click();
         userNote.sendKeys(newText);
+        getElementByName("commit").click();
+    }
+
+    public void deleteNicknameNote(String currentNickname) {
+        app.getNavigationHelper().goMyPage(currentNickname);
+        getElementByCssSelector(".fa-pencil").click();
+        getElementById("custom_user_name").click();
+        WebElement userNote = getElementById("custom_user_notes");
+        userNote.click();
+        userNote.clear();
         getElementByName("commit").click();
     }
 

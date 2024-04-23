@@ -7,6 +7,7 @@ import ru.kpfu.itis.gnt.helper.FragmentCreationHelper;
 import ru.kpfu.itis.gnt.helper.NavigationHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class AppManager {
 
@@ -21,6 +22,7 @@ public class AppManager {
 
     public AppManager() {
         FirefoxBinary firefoxBinary = new FirefoxBinary();
+        WebDriverManager.firefoxdriver().clearDriverCache().setup();
         firefoxBinary.addCommandLineOptions("--headless");
         FirefoxOptions options = new FirefoxOptions();
         options.setBinary(firefoxBinary);

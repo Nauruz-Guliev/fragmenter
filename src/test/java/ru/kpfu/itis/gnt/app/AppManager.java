@@ -1,5 +1,6 @@
 package ru.kpfu.itis.gnt.app;
 
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import ru.kpfu.itis.gnt.helper.AccountHelper;
@@ -12,7 +13,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class AppManager {
 
     private final String BASE_URL = "https://fragmenter.net/ru";
-    private final FirefoxDriver driver;
+    private final ChromeDriver driver;
     private final AccountHelper accountHelper;
     private final FragmentCreationHelper fragmentCreationHelper;
     private final NavigationHelper navigationHelper;
@@ -21,12 +22,12 @@ public class AppManager {
 
 
     public AppManager() {
-        FirefoxBinary firefoxBinary = new FirefoxBinary();
+        /*FirefoxBinary firefoxBinary = new FirefoxBinary();
         WebDriverManager.firefoxdriver().clearDriverCache().setup();
         firefoxBinary.addCommandLineOptions("--headless");
         FirefoxOptions options = new FirefoxOptions();
-        options.setBinary(firefoxBinary);
-        driver = new FirefoxDriver();
+        options.setBinary(firefoxBinary);*/
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         accountHelper = new AccountHelper(this);
         fragmentCreationHelper = new FragmentCreationHelper(this);

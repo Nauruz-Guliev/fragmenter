@@ -1,10 +1,10 @@
 package ru.kpfu.itis.gnt.test;
 
-import ru.kpfu.itis.gnt.model.AccountData;
+import ru.kpfu.itis.gnt.model.TestDataObject;
 
 public class CreateFragmentTest extends TestBase {
 
-    private AccountData account = new AccountData("nauruz0304", "nauruz9248327@gmail.com", "Nau");
+  //  private TestDataObject account = new TestDataObject("nauruz0304", "nauruz9248327@gmail.com", "Nau");
 
     /*@Test
     public void testFragmentCreation() {

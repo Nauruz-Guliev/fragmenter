@@ -1,10 +1,7 @@
 package ru.kpfu.itis.gnt.helper;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
 import ru.kpfu.itis.gnt.app.AppManager;
-import ru.kpfu.itis.gnt.model.AccountData;
+import ru.kpfu.itis.gnt.model.TestDataObject;
 import org.openqa.selenium.WebElement;
 
 public class AccountHelper extends HelperBase {
@@ -13,15 +10,15 @@ public class AccountHelper extends HelperBase {
         super(app);
     }
 
-    public void login(AccountData accountData) {
+    public void login(TestDataObject testDataObject) {
         WebElement emailField = getElementById("user_email");
         WebElement passwordField = getElementById("user_password");
 
         emailField.click();
-        emailField.sendKeys(accountData.getEmail());
+        emailField.sendKeys(testDataObject.getEmail());
 
         passwordField.click();
-        passwordField.sendKeys(accountData.getPassword());
+        passwordField.sendKeys(testDataObject.getPassword());
 
         getElementByName("commit").click();
     }

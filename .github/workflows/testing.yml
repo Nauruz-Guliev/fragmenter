@@ -18,11 +18,7 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Install Google Chrome
-        run: |
-          echo "geckodriver/googlechrome"
-          which geckodriver
-          geckodriver --version
-          which googlechrome
-          googlechrome --version
+      - uses: browser-actions/setup-chrome@v1
+      - run: chrome --version
       - name: Run Tests
         run: mvn -B package --file pom.xml test

@@ -17,12 +17,9 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
           cache: maven
-      - name: Install Firefox
+      - name: Install Google Chrome
         run: |
-          echo "geckodriver/firefox"
-          which geckodriver
-          geckodriver --version
-          which firefox
-          firefox --version
+          chmod +x ./scripts/InstallChrome.sh
+          ./scripts/InstallChrome.sh
       - name: Run Tests
         run: mvn -B package --file pom.xml test

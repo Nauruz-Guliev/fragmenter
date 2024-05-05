@@ -4,14 +4,12 @@ import ru.kpfu.itis.gnt.app.AppManager;
 
 public class NavigationHelper extends HelperBase {
 
-    private final String baseUrl;
 
-    public NavigationHelper(AppManager app, String baseUrl) {
+    public NavigationHelper(AppManager app) {
         super(app);
-        this.baseUrl = baseUrl;
     }
 
-    public void goMainPage() {
+    public void goMainPage(String baseUrl) {
         app.getDriver().get(baseUrl);
     }
 

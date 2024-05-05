@@ -11,4 +11,5 @@ public class TestDataObject {
     private String email;
     private String accountCode;
     private String text;
+    private String baseUrl;
 }

@@ -7,6 +7,7 @@ import ru.kpfu.itis.gnt.app.AppManager;
 public class TestBase {
 
     static protected AppManager app;
+
     @BeforeAll
     public static void setUp() {
         app = AppManager.getInstance();

@@ -5,6 +5,7 @@ import ru.kpfu.itis.gnt.model.TestDataObject;
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class TestDataGenerator {
 
@@ -13,8 +14,11 @@ public class TestDataGenerator {
     private String nickname = "";
     private String generatedString = "";
     private int textLength;
-    private static final String FILE_NAME = "test_data_object.json";
-    private Scanner scanner;
+    private static final String VALID_FILE_NAME = "valid_test_data_object.json";
+    private static final String INVALID_FILE_NAME = "invalid_test_data_object.json";
+    private static boolean isValidFileGenerationMode = true;
+    private final String BASE_URL = "https://fragmenter.net/ru";
+    private final Scanner scanner;
 
     public static void main(String[] args) {
         new TestDataGenerator();
@@ -22,28 +26,38 @@ public class TestDataGenerator {
 
     public TestDataGenerator() {
         scanner = new Scanner(System.in);
-        runProgram();
+        runGenerator();
     }
 
-    public void runProgram() {
+    private void runGenerator() {
         readConsoleInput();
-        writeObjectToFile(createTestDataObject());
-        readFromFile();
-    }
-
-    public void readConsoleInput() {
-        email = readUserInput("Введите email: ");
-        password = readUserInput("Введите пароль: ");
-        nickname = readUserInput("Введите текущий никнейм: ");
-        try {
-            textLength = Integer.parseInt(readUserInput("Введите длину строки: "));
-        } catch (NumberFormatException exception) {
-            System.out.println("\u001B"+ "Введите корректное число" + "\u001B[0m");
+        if (isValidFileGenerationMode) {
+            writeObjectToFile(createValidTestDataObject(), VALID_FILE_NAME);
+            readFromFile(VALID_FILE_NAME);
+        } else {
+            writeObjectToFile(createInvalidTestDataObject(), INVALID_FILE_NAME);
+            readFromFile(INVALID_FILE_NAME);
         }
-        generatedString = generateRandomString(textLength);
     }
 
-    public String readUserInput(String message) {
+    private void readConsoleInput() {
+        String userInput = readUserInput("Выберите режим генерации файла. Введите \"1\" для невалидного режима и любой другой символ для валидного режима: ");
+        if(userInput.equals("1")) {
+            isValidFileGenerationMode = false;
+        } else {
+            email = readUserInput("Введите email: ");
+            password = readUserInput("Введите пароль: ");
+            nickname = readUserInput("Введите текущий никнейм: ");
+            try {
+                textLength = Integer.parseInt(readUserInput("Введите длину строки: "));
+            } catch (NumberFormatException exception) {
+                System.out.println("\u001B" + "Введите корректное число" + "\u001B[0m");
+            }
+            generatedString = generateRandomString(textLength);
+        }
+    }
+
+    private String readUserInput(String message) {
         String userInput = null;
         boolean isRunning = true;
         while (isRunning) {
@@ -58,7 +72,7 @@ public class TestDataGenerator {
         return userInput;
     }
 
-    public String generateRandomString(int length) {
+    private String generateRandomString(int length) {
         int leftLimit = 48;
         int rightLimit = 122;
         Random random = new Random();
@@ -70,21 +84,36 @@ public class TestDataGenerator {
                 .toString();
     }
 
-    public TestDataObject createTestDataObject() {
+    private TestDataObject createInvalidTestDataObject() {
+        return TestDataObject.builder()
+                .accountCode(generateRandomString(getRandomInt()))
+                .text(generateRandomString(getRandomInt()))
+                .email(generateRandomString(getRandomInt()))
+                .password(generateRandomString(getRandomInt()))
+                .baseUrl(BASE_URL)
+                .build();
+    }
+
+    private int getRandomInt() {
+        return ThreadLocalRandom.current().nextInt(0, 20);
+    }
+
+    private TestDataObject createValidTestDataObject() {
         return TestDataObject.builder()
                 .accountCode(nickname)
                 .text(generatedString)
                 .email(email)
                 .password(password)
+                .baseUrl(BASE_URL)
                 .build();
     }
 
-    public void writeObjectToFile(TestDataObject object) {
+    private void writeObjectToFile(TestDataObject object, String fileName) {
         Gson gson = new Gson();
         String json = gson.toJson(object);
 
         try {
-            File file = new File(FILE_NAME);
+            File file = new File(fileName);
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -98,13 +127,15 @@ public class TestDataGenerator {
         }
     }
 
-    public void readFromFile() {
-        File file = new File(FILE_NAME);
+    private void readFromFile(String fileName) {
+        File file = new File(fileName);
         try (FileReader fr = new FileReader(file)) {
             int character;
+            System.out.println("Сгенерирован json: \n");
             while ((character = fr.read()) != -1) {
                 System.out.print((char) character);
             }
+            System.out.print("\n\n\n");
         } catch (IOException e) {
             System.out.println("Произошла ошибка при чтении файла.");
             e.printStackTrace();

@@ -1,23 +1,23 @@
 package ru.kpfu.itis.gnt.test;
 
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+import ru.kpfu.itis.gnt.helper.FragmentCreationHelper;
+import ru.kpfu.itis.gnt.helper.NavigationHelper;
+import ru.kpfu.itis.gnt.mapper.ValidTestDataObjectMapper;
 import ru.kpfu.itis.gnt.model.TestDataObject;
 
-public class CreateFragmentTest extends TestBase {
+public class CreateFragmentTest extends AuthBase {
 
-  //  private TestDataObject account = new TestDataObject("nauruz0304", "nauruz9248327@gmail.com", "Nau");
-
-    /*@Test
-    public void testFragmentCreation() {
+    @ParameterizedTest
+    @Order(4)
+    @ArgumentsSource(ValidTestDataObjectMapper.class)
+    public void testFragmentCreation(TestDataObject testDataObject) {
         String message = "Погода сегодня восхитительна!";
-
-        AccountHelper accountHelper = app.getAccountHelper();
         NavigationHelper navigationHelper = app.getNavigationHelper();
         FragmentCreationHelper fragmentCreationHelper = app.getFragmentCreationHelper();
-
-        navigationHelper.goMainPage();
-        accountHelper.login(account);
-
         navigationHelper.goFragmentCreationPage();
         fragmentCreationHelper.createFragment(message);
-    }*/
+    }
 }

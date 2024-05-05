@@ -1,5 +1,6 @@
 package ru.kpfu.itis.gnt.helper;
 
+import org.openqa.selenium.By;
 import ru.kpfu.itis.gnt.app.AppManager;
 import ru.kpfu.itis.gnt.model.TestDataObject;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,12 @@ public class AccountHelper extends HelperBase {
     }
 
     public void login(TestDataObject testDataObject) {
+        if (isLoggedIn()) {
+            if (isLoggedIn(testDataObject.getAccountCode())) {
+                return;
+            }
+            logout(testDataObject.getAccountCode());
+        }
         WebElement emailField = getElementById("user_email");
         WebElement passwordField = getElementById("user_password");
 
@@ -54,5 +61,15 @@ public class AccountHelper extends HelperBase {
 
     public WebElement getUserNote(){
         return getElementById("custom_user_notes");
+    }
+
+    public boolean isLoggedIn() {
+        // проверка наличия кнопки "Войти"
+        return app.getDriver().findElements(By.name("commit")).isEmpty();
+    }
+
+    public boolean isLoggedIn(String nickname) {
+        // проверка наличия кнопки пользователя, текст кнопки совпадает с ником
+        return !app.getDriver().findElements(By.linkText(nickname)).isEmpty();
     }
 }
